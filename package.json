@@ -1,0 +1,18 @@
+{
+  "name": "@shm/icons",
+  "version": "1.0.0",
+  "description": "实惠喵图标库",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.innotechx.com:shm/common/icons.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^3.9.5"
+  }
+}

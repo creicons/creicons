@@ -1,0 +1,8 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base"],
+  "assignees": ["wupeng"],
+  "rangeStrategy": "bump",
+  "automerge": true,
+  "timezone": "Asia/Shanghai"
+}
