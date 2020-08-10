@@ -17,5 +17,9 @@
     "fs-extra": "^9.0.1",
     "globby": "^11.0.1",
     "yargs": "^15.4.1"
+  },
+  "devDependencies": {
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.0.5"
   }
 }
