@@ -1,21 +1,21 @@
 {
-  "name": "@shm/icons",
+  "name": "creicons",
   "version": "1.0.0",
-  "description": "实惠喵图标库",
-  "main": "index.js",
+  "description": "Create react or react-native icon components by SVG.",
+  "bin": "./scripts/index.js",
   "scripts": {
-    "svgo": "svgo icons --config .svgo.yml",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node ./scripts/index doc -i ./src -o ./icons2"
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.innotechx.com:shm/common/icons.git"
+    "url": "https://github.com/creicons/creicons.git"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "svgo": "^1.3.2",
-    "del-cli": "^3.0.1",
-    "typescript": "^3.9.5"
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "fs-extra": "^9.0.1",
+    "globby": "^11.0.1",
+    "yargs": "^15.4.1"
   }
 }
