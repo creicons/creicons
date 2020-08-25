@@ -1,11 +1,12 @@
-const fs = require("fs");
+const fs = require('fs');
+const path = require('path');
 
-function writeDoc(icons) {
+function writeDoc(outputDir, icons) {
     const header = `## Icons\n\n| name | icon |\n|---|---|\n`;
-    const body = icons.map(iconInfo => `| ${iconInfo.name} | <img src="./icons/${iconInfo.name}.svg" width="24" height="24" alt="${iconInfo.name}" /> |\n`).join('');
-    fs.writeFile('./icons.md', header + body, () => {
-        console.info('Success to create icons.md.');
-    });
+    const body = icons.map(
+        iconInfo => `| ${iconInfo.name} | <img src="./icons/${iconInfo.name}.svg" width="24" height="24" alt="${iconInfo.name}" /> |\n`,
+    ).join('');
+    fs.writeFileSync(path.join(outputDir, 'icons.md'), header + body);
 }
 
 module.exports = writeDoc;
