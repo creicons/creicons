@@ -2,6 +2,9 @@
 const yargs = require('yargs');
 const getIcons = require('./parseIcons');
 const writeDoc = require('./createDoc');
+const createReactComponents = require('./createReactComponents');
+const path = require('path');
+const fs = require('fs');
 
 const {argv} = yargs
   .usage('Usage: creicons --input <input filepaths> --output <output filepath>')
@@ -17,14 +20,23 @@ const {argv} = yargs
     type: 'string',
     describe: 'Ouput components folder, defalut is "./src". '
   });
-console.log('argv', argv);
-console.log('argv_', argv._);
+
+// create output dir
+const outputStr = argv.output || './src';
+const outputDir = path.normalize(outputStr);
+if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir);
+}
 
 if (argv._.length < 1) {
     throw new Error('At least one of output is required.');
 }
-console.log('argv_2', argv._);
+
 const icons = getIcons(argv.input);
 if (argv._.includes('doc')) {
-    writeDoc(icons);
+    writeDoc(outputDir, icons);
+}
+
+if (argv._.includes('react')) {
+  createReactComponents(outputDir, icons);
 }

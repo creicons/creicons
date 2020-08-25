@@ -1,0 +1,7 @@
+icons/
+.editorconfig
+node_modules/
+.eslintrc.js
+.prettierignore
+.prettierrc
+icons.md

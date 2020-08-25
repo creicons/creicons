@@ -1,13 +1,10 @@
 {
   "name": "creicons",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Create react or react-native icon components by SVG.",
   "bin": "./scripts/index.js",
-  "files": [
-    "scripts/"
-  ],
   "scripts": {
-    "build": "node ./scripts/index doc -i ./src -o ./icons2"
+    "build": "node ./scripts/index doc react -i ./icons"
   },
   "repository": {
     "type": "git",
@@ -22,7 +19,8 @@
     "yargs": "^15.4.1"
   },
   "devDependencies": {
-    "eslint-plugin-prettier": "^3.1.4",
+    "eslint": "^7.7.0",
+    "eslint-plugin-node": "^11.1.0",
     "prettier": "^2.0.5"
   }
 }
