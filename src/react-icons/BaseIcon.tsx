@@ -1,19 +1,22 @@
 import React, { CSSProperties, FunctionComponent } from 'react';
 
-type PreserveAspectRatio = 'nonzero' | 'evenodd' | 'inherit';
+export type PreserveAspectRatio = 'nonzero' | 'evenodd' | 'inherit';
 
 export interface IconPorps {
     width?: number;
     height?: number;
-    viewBox: string;
     color?: string;
     preserveAspectRatio?: string;
     fillRule?: PreserveAspectRatio;
     style?: CSSProperties;
+}
+
+interface BaseIconPorps extends IconPorps {
+    viewBox: string;
     d: string;
 }
 
-const BaseIcon: FunctionComponent<IconPorps> = ({
+const BaseIcon: FunctionComponent<BaseIconPorps> = ({
     width,
     height,
     viewBox,

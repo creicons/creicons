@@ -4,12 +4,11 @@ const path = require('path');
 function createReactBaseComponent(componentsDir) {
     const content = `import React, { CSSProperties, FunctionComponent } from 'react';
 
-type PreserveAspectRatio = 'nonzero' | 'evenodd' | 'inherit';
+export type PreserveAspectRatio = 'nonzero' | 'evenodd' | 'inherit';
 
 export interface IconPorps {
     width?: number;
     height?: number;
-    viewBox: string;
     color?: string;
     preserveAspectRatio?: string;
     fillRule?: PreserveAspectRatio;
@@ -17,6 +16,7 @@ export interface IconPorps {
 }
 
 interface BaseIconPorps extends IconPorps {
+    viewBox: string;
     d: string;
 }
 
@@ -54,13 +54,40 @@ export default BaseIcon;\n`;
 }
 
 function createReactComponent(componentsDir, iconInfo) {
-    const { name, width, height, fillRule, d } = iconInfo;
+    const { name, width, height, viewBox, fillRule, d } = iconInfo;
     const componentName = name.trim().split(' ').map(
         (str) => str.replace(/( |^)[a-z]/g, (L) => L.toUpperCase()),
     ).join('');
+    const content = `import React, { FunctionComponent } from 'react';
+import BaseIcon, { IconPorps } from './BaseIcon';
+
+const viewBox = '${viewBox}';
+const d = '${d}';
+
+const ${componentName}Icon: FunctionComponent<IconPorps> = ({
+    width = ${width},
+    height = ${height},
+    color,
+    preserveAspectRatio,
+    fillRule = '${fillRule}',
+    style,
+}) => {
+    return <BaseIcon 
+        width={width}
+        height={height}
+        color={color}
+        preserveAspectRatio={preserveAspectRatio}
+        fillRule={fillRule}
+        style={style}
+        viewBox={viewBox}
+        d={d}
+    />;
+};
+
+export default ${componentName}Icon;
+`;
     const componentFile = path.join(componentsDir, `${componentName}Icon.tsx`);
-    fs.writeFileSync(componentFile, 'test');
-    console.log('componentDir', componentFile);
+    fs.writeFileSync(componentFile, content);
 }
 
 function createReactComponents(outputDir, icons) {

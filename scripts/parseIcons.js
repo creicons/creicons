@@ -12,11 +12,11 @@ function getIcons(input) {
 
     return svgFilepaths.map(filepath => {
         const filename = path.parse(filepath).name;
-        console.log('filename', filename);
         const svg = fs.readFileSync(path.resolve(filepath), 'utf8');
         const svgElement = cheerio.load(svg)('svg');
         const svgWidth = parseInt(svgElement.attr('width')) || 16;
         const svgHeight = parseInt(svgElement.attr('height')) || 16;
+        const viewBox = parseInt(svgElement.attr('viewBox')) || '0 0 16 16';
         const svgPath = svgElement.children('path');
         const d = svgPath.attr('d');
         const fillRule = svgPath.attr('fill-rule');
@@ -24,6 +24,7 @@ function getIcons(input) {
             name: filename,
             width: svgWidth,
             height: svgHeight,
+            viewBox,
             fillRule,
             d,
         };
