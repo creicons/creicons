@@ -48,14 +48,15 @@ const BaseIcon: FunctionComponent<BaseIconPorps> = ({
     );
 };
 
-export default BaseIcon;\n`;
+export default BaseIcon;
+`;
     const iconBaseComponentFile = path.join(componentsDir, 'BaseIcon.tsx');
     fs.writeFileSync(iconBaseComponentFile, content);
 }
 
 function createReactComponent(componentsDir, iconInfo) {
     const { name, width, height, viewBox, fillRule, d } = iconInfo;
-    const componentName = name.trim().split(' ').map(
+    const componentName = name.trim().split(/ |-/).map(
         (str) => str.replace(/( |^)[a-z]/g, (L) => L.toUpperCase()),
     ).join('');
     const content = `import React, { FunctionComponent } from 'react';
@@ -72,7 +73,7 @@ const ${componentName}Icon: FunctionComponent<IconPorps> = ({
     fillRule = '${fillRule}',
     style,
 }) => {
-    return <BaseIcon 
+    return <BaseIcon
         width={width}
         height={height}
         color={color}
