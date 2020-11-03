@@ -33,10 +33,8 @@ export default BaseIcon;
 }
 
 function createReactNativeComponent(componentsDir, iconInfo) {
-    const { name, width, height, d } = iconInfo;
-    const componentName = name.trim().split(/ |-/).map(
-        (str) => str.replace(/(^| )[a-z]/g, (L) => L.toUpperCase()),
-    ).join('');
+    const { info = {} } = iconInfo;
+    const { componentName, width, height, d } = info;
 
     const content = `import React, { FunctionComponent } from 'react';
 import BaseIcon, { IconPorps } from './BaseIcon';
@@ -45,7 +43,7 @@ const d = '${d}';
 const defaultWidth = ${width};
 const defaultHeight = ${height};
 
-const ${componentName}Icon: FunctionComponent<IconPorps> = ({
+const ${componentName}: FunctionComponent<IconPorps> = ({
     width = defaultWidth,
     height = defaultHeight,
     color,
@@ -55,9 +53,9 @@ const ${componentName}Icon: FunctionComponent<IconPorps> = ({
     );
 };
 
-export default ${componentName}Icon;
+export default ${componentName};
 `;
-    const componentFile = path.join(componentsDir, `${componentName}Icon.tsx`);
+    const componentFile = path.join(componentsDir, `${componentName}.tsx`);
     fs.writeFileSync(componentFile, content);
 }
 

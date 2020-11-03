@@ -55,17 +55,15 @@ export default BaseIcon;
 }
 
 function createReactComponent(componentsDir, iconInfo) {
-    const { name, width, height, viewBox, fillRule, d } = iconInfo;
-    const componentName = name.trim().split(/ |-/).map(
-        (str) => str.replace(/( |^)[a-z]/g, (L) => L.toUpperCase()),
-    ).join('');
+    const { info } = iconInfo;
+    const { componentName, width, height, viewBox, fillRule, d } = info;
     const content = `import React, { FunctionComponent } from 'react';
 import BaseIcon, { IconPorps } from './BaseIcon';
 
 const viewBox = '${viewBox}';
 const d = '${d}';
 
-const ${componentName}Icon: FunctionComponent<IconPorps> = ({
+const ${componentName}: FunctionComponent<IconPorps> = ({
     width = ${width},
     height = ${height},
     color,
@@ -85,9 +83,9 @@ const ${componentName}Icon: FunctionComponent<IconPorps> = ({
     />;
 };
 
-export default ${componentName}Icon;
+export default ${componentName};
 `;
-    const componentFile = path.join(componentsDir, `${componentName}Icon.tsx`);
+    const componentFile = path.join(componentsDir, `${componentName}.tsx`);
     fs.writeFileSync(componentFile, content);
 }
 
